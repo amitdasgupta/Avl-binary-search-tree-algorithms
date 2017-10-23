@@ -29,6 +29,15 @@ void inOrderTraversal(AvlBst* root)
         inOrderTraversal(root->right);
     }
 }
+/**********************preorder traversal*///////////////////////
+void preOrder(AvlBst* root)
+{
+    if(!root)
+        return;
+    cout<<root->data<< " ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
 /**************************height of avl tree*///////////////////
 int heightOfAvlBst(AvlBst* root)
 {
@@ -67,7 +76,7 @@ AvlBst* singleRoltationRight(AvlBst* root)
     x->left=root;
     x->height=max(heightOfAvlBst(x->right),heightOfAvlBst(x->left))+1;
     root->height=max(heightOfAvlBst(root->left),heightOfAvlBst(root->right))+1;
-    return root;
+    return x;
 }
 /***********************************rotation in right subtree of left child*///////////////////////
 AvlBst* doubleRotationLeft(AvlBst* root)
@@ -120,13 +129,14 @@ void insertIntoAvl(AvlBst* &root,int data)
 int main()
 {
     AvlBst* root=NULL;
-    insertIntoAvl(root,10);
-    insertIntoAvl(root,6);
-    insertIntoAvl(root,16);
     insertIntoAvl(root,4);
-    insertIntoAvl(root,9);
-    insertIntoAvl(root,13);
+    insertIntoAvl(root,2);
     insertIntoAvl(root,7);
+    insertIntoAvl(root,6);
+    insertIntoAvl(root,5);
+    insertIntoAvl(root,8);
+    preOrder(root);
+    cout<<"\n";
     inOrderTraversal(root);
      //cout<<root->height;
     return 0;

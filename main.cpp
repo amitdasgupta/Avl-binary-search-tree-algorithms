@@ -42,6 +42,18 @@ void inOrderTraversal(AvlBst* root)
         inOrderTraversal(root->right);
     }
 }
+/***********************preorder traversal*//////////////////////////////
+void preOrderTraversal(AvlBst* root)
+{
+    if(!root)
+        return;
+    else
+    {
+        cout<<root->data<<" ";
+        preOrderTraversal(root->left);
+        preOrderTraversal(root->right);
+    }
+}
 /**************************height of avl tree*///////////////////
 int heightOfAvlBst(AvlBst* root)
 {
@@ -56,7 +68,7 @@ int heightDifferenceAvl(AvlBst* root)
     return abs(heightOfAvlBst(root->left)-heightDifferenceAvl(root->right));
 
 }
-/*************************************given a height h give an algorithm for generating HB(0)*////////////////////////////
+/*************************************given a height h give an algorithm for generating HB(0)
 AvlBst* giveTreeHB(int h,int &i)
 {
     if(h==-1)
@@ -76,7 +88,7 @@ AvlBst* giveTreeHB(int h,int &i)
             return NULL;
     }
 }
-
+*////////////////////////////
 /**************
 AvlBst* giveTreeHB(int h,int &i)
 {
@@ -90,10 +102,24 @@ AvlBst* giveTreeHB(int h,int &i)
         head->right=giveTreeHB(h-2,i);
     }
 }*////////
+bool isAvlTree(AvlBst* root)
+{
+    if(!root||!root->left&&!root->right)
+        return true;
+    else
+    {
+    if(!root->left)
+    return abs(root->right->height<=1)&&isAvlTree(root->right);
+    else
+        if(!root->right)
+    return abs(root->left->height<=1)&&isAvlTree(root->left);
+        return abs(root->left->height-root->right->height<=1)&&isAvlTree(root->left)&&isAvlTree(root->right);
+        }
+}
 int main()
 {
     AvlBst* root=NULL;
-    /*insertIntoAvl(root,10);
+    insertIntoAvl(root,10);
     insertIntoAvl(root,6);
     insertIntoAvl(root,16);
     insertIntoAvl(root,4);
@@ -101,12 +127,20 @@ int main()
     insertIntoAvl(root,13);
     insertIntoAvl(root,7);
     inOrderTraversal(root);
-    */
+    cout<<"\n";
+    preOrderTraversal(root);
+    /*
     int h,i=0;
     cin>>h;
     root=giveTreeHB(h,i);
     cout<<"c";
     inOrderTraversal(root);
     cout<<"\nN="<<i;
+    */
+    cout<<"\n";
+    if(isAvlTree(root))
+        cout<<"yes it is an avl tree ";
+    else
+        cout<<"no it us not an avl tree";
     return 0;
 }

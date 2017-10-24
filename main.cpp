@@ -102,6 +102,7 @@ AvlBst* giveTreeHB(int h,int &i)
         head->right=giveTreeHB(h-2,i);
     }
 }*////////
+/**********************code for checking bst for an avl tree
 bool isAvlTree(AvlBst* root)
 {
     if(!root||!root->left&&!root->right)
@@ -115,6 +116,37 @@ bool isAvlTree(AvlBst* root)
     return abs(root->left->height<=1)&&isAvlTree(root->left);
         return abs(root->left->height-root->right->height<=1)&&isAvlTree(root->left)&&isAvlTree(root->right);
         }
+}
+*///////////////////////////////
+void countNodesBetweenN1AndN2(AvlBst* root,int smaller,int larger)
+{
+    if(!root)
+        return ;
+    else
+    {  // cout<<root->data<<"c";
+        if(root->data<=smaller)
+        {     if(root->data==smaller)
+                cout<<root->data<<" ";
+             countNodesBetweenN1AndN2(root->right,smaller,larger);
+        }
+    else
+        if(root->data>=larger)
+        {
+            countNodesBetweenN1AndN2(root->left,smaller,larger);
+            if(root->data>=larger)
+                cout<<root->data<<" ";
+
+
+        }
+        else
+        {
+            countNodesBetweenN1AndN2(root->left,smaller,larger);
+            cout<<root->data<<" ";
+            countNodesBetweenN1AndN2(root->right,smaller,larger);
+
+        }
+
+    }
 }
 int main()
 {
@@ -137,10 +169,15 @@ int main()
     inOrderTraversal(root);
     cout<<"\nN="<<i;
     */
-    cout<<"\n";
+   /***************** cout<<"\n";
     if(isAvlTree(root))
         cout<<"yes it is an avl tree ";
     else
         cout<<"no it us not an avl tree";
+        *///////////////////////////
+    int n1,n2;
+    cin>>n1>>n2;
+ //   cout<<"\n";
+    countNodesBetweenN1AndN2(root,n1,n2);
     return 0;
 }

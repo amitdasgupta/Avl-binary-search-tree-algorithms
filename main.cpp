@@ -35,9 +35,10 @@ void inOrderTraversal(AvlBst* root)
     if(!root)
         return;
     else
-    {
+    {    if(root->left)
         inOrderTraversal(root->left);
         cout<<root->data<<" ";
+        if(root->right)
         inOrderTraversal(root->right);
     }
 }
@@ -58,16 +59,37 @@ int heightDifferenceAvl(AvlBst* root)
 /*************************************given a height h give an algorithm for generating HB(0)*////////////////////////////
 AvlBst* giveTreeHB(int h,int &i)
 {
-    if(h==0)
-        return 0;
+    if(h==-1)
+        return NULL;
+    else
+    {
+        AvlBst* head=new AvlBst(0);
+        i++;
+        cout<<h<<" ";
+        if((h-1)>=-1)
+        head->left=giveTreeHB(h-1,i);
+        else
+            return NULL;
+        if((h-2)>=-1)
+        head->right=giveTreeHB(h-2,i);
+        else
+            return NULL;
+    }
+}
+
+/**************
+AvlBst* giveTreeHB(int h,int &i)
+{
+    if(h==-1)
+        return NULL;
     else
     {
         AvlBst* head=new AvlBst(i);
         i++;
         head->left=giveTreeHB(h-1,i);
-        head->right=giveTreeHB(h-1,i);
+        head->right=giveTreeHB(h-2,i);
     }
-}
+}*////////
 int main()
 {
     AvlBst* root=NULL;
@@ -80,9 +102,11 @@ int main()
     insertIntoAvl(root,7);
     inOrderTraversal(root);
     */
-    int h,i=1;
+    int h,i=0;
     cin>>h;
     root=giveTreeHB(h,i);
+    cout<<"c";
     inOrderTraversal(root);
+    cout<<"\nN="<<i;
     return 0;
 }
